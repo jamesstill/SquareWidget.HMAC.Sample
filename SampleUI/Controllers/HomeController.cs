@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Diagnostics;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
@@ -16,7 +17,7 @@ namespace SampleUI.Controllers
         // use DI in a real app
         public HomeController()
         {
-            _baseAddress = "https://localhost:44384";
+            _baseAddress = "https://localhost:5001";
             _credentials = new ClientCredentials
             {
                 ClientId = "TestClient",
@@ -29,7 +30,18 @@ namespace SampleUI.Controllers
         public IActionResult Index()
         {
             var requestUri = "api/widgets";
-            var widgets = _client.Get<List<Widget>>(requestUri).Result;
+            List<Widget> widgets;
+
+            try
+            {
+                widgets = _client.Get<List<Widget>>(requestUri).Result ?? new List<Widget>();
+            }
+            catch (Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message);
+                throw;
+            }
+
             return View(widgets);
         }
 

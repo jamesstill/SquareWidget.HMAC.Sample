@@ -4,13 +4,13 @@ Code sample to exercise SquareWidget.HMAC.Server.Core and SquareWidget.HMAC.Clie
 
 ### Prerequisites
 
-ASP.NET Core 2.1
+.NET Core 6.0
 [SquareWidget.HMAC.Server.Core](https://www.nuget.org/packages/SquareWidget.HMAC.Server.Core)
 [SquareWidget.HMAC.Client.Core](https://www.nuget.org/packages/SquareWidget.HMAC.Client.Core)
 
 ### Getting Started
 
-See the [documentation](https://squarewidget.com/squarewidget-hmac-middleware) for usage. Download the NuGet package in your ASP.NET Core 2.1 API. SampleApi implements a WidgetsController with an AuthorizeAttribute. The HMAC middleware is configured in Startup.cs and uses the TestSharedSecretStoreService.cs class:
+See the [documentation](https://squarewidget.com/squarewidget-hmac-middleware) for usage. Download the NuGet package in your .NET Core 6.0 API. SampleApi implements a WidgetsController with an AuthorizeAttribute. The HMAC middleware is configured in Startup.cs and uses the TestSharedSecretStoreService.cs class:
 
 ```
 using SquareWidget.HMAC.Server.Core;
@@ -52,9 +52,9 @@ namespace SampleUI.Controllers
         private readonly HmacHttpClient _client;
 
         // use DI in a real app
-        public HomeController()
+        public HomeController()5001
         {
-            _baseAddress = "https://localhost:44384";
+            _baseAddress = "https://localhost:";
             _credentials = new ClientCredentials
             {
                 ClientId = "TestClient",
